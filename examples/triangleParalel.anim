@@ -1,0 +1,17 @@
+
+def main ()
+    triangle = Triangle [centerX=300, centerY=300, colorFill="0:255:0", colorLine ="0:0:255", radius=50.0];
+    escalat = Scale [factor=2, dur=1];
+    rotacio = Rotate [w=30, dur=2];
+    translacio = Translate [dur=2, x=-300, y=-300];
+    mov = (escalat | rotacio) & escalat & rotacio & translacio & escalat;
+    objEnMov = mov->triangle;
+    circle = Circle [centerX=100 + 500, centerY=800, radius=50.0];
+    objEnMov = objEnMov & (mov->circle);
+    for i in [2] do
+    	circle = Circle [centerX=i*70 + 500, centerY=500, radius=50.0];
+    	objEnMov = objEnMov & (escalat->circle);
+    endfor
+    print objEnMov;
+    run 2000,2000,objEnMov;
+endfunc
